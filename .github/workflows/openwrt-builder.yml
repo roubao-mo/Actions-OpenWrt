@@ -70,6 +70,13 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
+      # 添加bin文件
+    - name: Add rk3328-idbloader.bin
+      run: |
+        mkdir -p /workdir/openwrt/staging_dir/target-aarch64_generic_musl/image
+        wget https://wrt.mo.rbtv.xyz:1929/bin/rk3328-idbloader.bin -O /workdir/openwrt/staging_dir/target-aarch64_generic_musl/image/rk3328-idbloader.bin
+        ls -l /workdir/openwrt/staging_dir/target-aarch64_generic_musl/image/rk3328-idbloader.bin
+
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
